@@ -1,5 +1,4 @@
 import http.server
-import threading
 
 import ngrok
 
@@ -14,16 +13,13 @@ class HelloHandler(http.server.BaseHTTPRequestHandler):
 
 
 def main():
-    # Start a simple HTTP server
-    server = http.server.HTTPServer(("localhost", 8080), HelloHandler)
-    threading.Thread(target=server.serve_forever, daemon=True).start()
-
     # Forward ngrok traffic to the local server
     listener = ngrok.forward("localhost:8080", authtoken_from_env=True)
     print(f"Ingress established at: {listener.url()}")
 
-    # Keep the process running
-    input("Press Enter to exit...\n")
+    # Start the HTTP server
+    server = http.server.HTTPServer(("localhost", 8080), HelloHandler)
+    server.serve_forever()
 
 
 if __name__ == "__main__":
