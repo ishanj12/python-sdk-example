@@ -12,15 +12,7 @@ class HelloHandler(http.server.BaseHTTPRequestHandler):
         self.wfile.write(b"Hello from ngrok-python!\n")
 
 
-def main():
-    # Forward ngrok traffic to the local server
-    listener = ngrok.forward("localhost:8080", authtoken_from_env=True)
-    print(f"Ingress established at: {listener.url()}")
-
-    # Start the HTTP server
-    server = http.server.HTTPServer(("localhost", 8080), HelloHandler)
-    server.serve_forever()
-
-
-if __name__ == "__main__":
-    main()
+server = http.server.HTTPServer(("localhost", 0), HelloHandler)
+ngrok.listen(server)
+print(f"Ingress established at: {server.url}")
+server.serve_forever()
