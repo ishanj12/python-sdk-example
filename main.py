@@ -10,7 +10,7 @@ class HelloHandler(http.server.BaseHTTPRequestHandler):
         self.send_response(200)
         self.send_header("Content-Type", "text/plain")
         self.end_headers()
-        self.wfile.write(b"Hello from python-sdk-example!\n")
+        self.wfile.write(b"Hello from ngrok-python!\n")
 
 
 def main():
