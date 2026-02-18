@@ -4,10 +4,18 @@ import threading
 import ngrok
 
 
+class HelloHandler(http.server.BaseHTTPRequestHandler):
+    def do_GET(self):
+        print(f"GET {self.path}")
+        self.send_response(200)
+        self.send_header("Content-Type", "text/plain")
+        self.end_headers()
+        self.wfile.write(b"Hello from python-sdk-example!\n")
+
+
 def main():
     # Start a simple HTTP server
-    handler = http.server.SimpleHTTPRequestHandler
-    server = http.server.HTTPServer(("localhost", 8080), handler)
+    server = http.server.HTTPServer(("localhost", 8080), HelloHandler)
     threading.Thread(target=server.serve_forever, daemon=True).start()
 
     # Forward ngrok traffic to the local server
