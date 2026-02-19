@@ -7,8 +7,6 @@ A minimal HTTP server using the [ngrok Python SDK](https://github.com/ngrok/ngro
 ```sh
 git clone git@github.com:ngrok/python-sdk-example.git
 cd python-sdk-example
-python3 -m venv venv
-source venv/bin/activate
 pip install -r requirements.txt
 NGROK_AUTHTOKEN=<token> python main.py
 ```
