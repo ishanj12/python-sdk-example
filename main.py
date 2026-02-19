@@ -15,4 +15,10 @@ class HelloHandler(http.server.BaseHTTPRequestHandler):
 server = http.server.HTTPServer(("localhost", 8080), HelloHandler)
 listener = ngrok.forward("localhost:8080", authtoken_from_env=True)
 print(f"Ingress established at: {listener.url()}")
-server.serve_forever()
+
+try:
+    server.serve_forever()
+except KeyboardInterrupt:
+    print("\nShutting down...")
+    ngrok.disconnect()
+    server.server_close()
