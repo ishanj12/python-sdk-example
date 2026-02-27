@@ -25,11 +25,11 @@ NGROK_AUTHTOKEN=<token> python main.py
    import ngrok
 
    def connect_ngrok():
-       listener = ngrok.forward("localhost:8085", authtoken_from_env=True)
-       print(f"Available at: {listener.url()}")
+       forwarder = ngrok.forward("localhost:8085", authtoken_from_env=True)
+       print(f"Available at: {forwarder.url()}")
    ```
 
-3. Set your authtoken:
+3. Set your authtoken and restart your app:
 
    ```sh
    export NGROK_AUTHTOKEN=<token>

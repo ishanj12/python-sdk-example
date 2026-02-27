@@ -21,13 +21,13 @@ def start_server():
 
 
 def connect_ngrok():
-    listener = ngrok.forward(
+    forwarder = ngrok.forward(
         "localhost:8085",
         authtoken_from_env=True,
 
         # Uncomment below to use a specific domain.
         # https://dashboard.ngrok.com/domains
-        # domain="<your_domain_here>",
+        # domain="hello-world.your-domain.com",
 
         # Uncomment below to load balance across multiple instances of your app.
         # https://ngrok.com/docs/universal-gateway/endpoint-pooling/
@@ -41,7 +41,7 @@ def connect_ngrok():
         #     ],
         # }),
     )
-    print(f"Available at: {listener.url()}")
+    print(f"Available at: {forwarder.url()}")
 
 
 def main():
